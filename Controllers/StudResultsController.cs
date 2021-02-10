@@ -9,7 +9,7 @@ using WebApplicationCoreFirst.Data;
 
 namespace WebApplicationCoreFirst.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class StudResultsController : ControllerBase
     {
@@ -19,89 +19,118 @@ namespace WebApplicationCoreFirst.Controllers
         {
             _context = context;
         }
+       // StudResult[] GetResult = new StudResult[]
 
-        // GET: api/StudResults
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<StudResult>>> GetStudResult()
+       /*[HttpGet("{RollNo})")]
+        public ActionResult<StudResult> GetStudent(int id)
+
         {
-            return await _context.StudResult.ToListAsync();
-        }
 
-        // GET: api/StudResults/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<StudResult>> GetStudResult(int id)
-        {
-            var studResult = await _context.StudResult.FindAsync(id);
+            var student = GetResult.FirstOrDefault((p) => p.RollNo == id);
 
-            if (studResult == null)
+            if (student == null)
             {
                 return NotFound();
             }
 
-            return studResult;
+            return Ok(student);
+        }*/
+        [HttpGet("{RollNo})")]
+        public ActionResult GetStudentRecord(int id)
+        {
+            //var res = _context.StudResult.Find(id).ToString();
+            // var res = _context.StudResult.Where(p => p.RollNo == id);
+            var res = _context.StudResult.FirstOrDefault((p) => p.Id == id);
+            if (res == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(res);
         }
 
-        // PUT: api/StudResults/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutStudResult(int id, StudResult studResult)
-        {
-            if (id != studResult.Id)
+            /*// GET: api/StudResults
+            [HttpGet]
+            public async Task<ActionResult<IEnumerable<StudResult>>> GetStudResult()
             {
-                return BadRequest();
+                return await _context.StudResult.ToListAsync();
             }
 
-            _context.Entry(studResult).State = EntityState.Modified;
+            // GET: api/StudResults/5
+            [HttpGet("{id}")]
+            public async Task<ActionResult<StudResult>> GetStudResult(int id)
+            {
+                var studResult = await _context.StudResult.FindAsync(id);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!StudResultExists(id))
+                if (studResult == null)
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+
+                return studResult;
             }
 
-            return NoContent();
-        }
-
-        // POST: api/StudResults
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<StudResult>> PostStudResult(StudResult studResult)
-        {
-            _context.StudResult.Add(studResult);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetStudResult", new { id = studResult.Id }, studResult);
-        }
-
-        // DELETE: api/StudResults/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteStudResult(int id)
-        {
-            var studResult = await _context.StudResult.FindAsync(id);
-            if (studResult == null)
+            // PUT: api/StudResults/5
+            // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+            [HttpPut("{id}")]
+            public async Task<IActionResult> PutStudResult(int id, StudResult studResult)
             {
-                return NotFound();
+                if (id != studResult.Id)
+                {
+                    return BadRequest();
+                }
+
+                _context.Entry(studResult).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!StudResultExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return NoContent();
             }
 
-            _context.StudResult.Remove(studResult);
-            await _context.SaveChangesAsync();
+            // POST: api/StudResults
+            // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+            [HttpPost]
+            public async Task<ActionResult<StudResult>> PostStudResult(StudResult studResult)
+            {
+                _context.StudResult.Add(studResult);
+                await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+                return CreatedAtAction("GetStudResult", new { id = studResult.Id }, studResult);
+            }
 
-        private bool StudResultExists(int id)
-        {
-            return _context.StudResult.Any(e => e.Id == id);
+            // DELETE: api/StudResults/5
+            [HttpDelete("{id}")]
+            public async Task<IActionResult> DeleteStudResult(int id)
+            {
+                var studResult = await _context.StudResult.FindAsync(id);
+                if (studResult == null)
+                {
+                    return NotFound();
+                }
+
+                _context.StudResult.Remove(studResult);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+
+            private bool StudResultExists(int id)
+            {
+                return _context.StudResult.Any(e => e.Id == id);
+            }*/
         }
-    }
 }

@@ -12,7 +12,7 @@ namespace WebApplicationCoreFirst.Data
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
+        [Required]
         public int RollNo { get; set; }
         [Required]
         public string StudName { get; set; }
