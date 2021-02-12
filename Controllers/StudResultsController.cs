@@ -35,7 +35,7 @@ namespace WebApplicationCoreFirst.Controllers
 
             return Ok(student);
         }*/
-        [HttpGet("{RollNo})")]
+        [HttpGet("{Id})")]
         public ActionResult GetStudentRecord(int id)
         {
             //var res = _context.StudResult.Find(id).ToString();
